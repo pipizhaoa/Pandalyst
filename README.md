@@ -188,7 +188,7 @@ print(answer)
 ## Overview of Our Method
 
 <p align="center">
-    <img src="imgs/method.jpg" width="400"/>
+    <img src="imgs/method.jpg" width="500"/>
 </p>
 
 **We train Pandalyst based on WizardCoder.**

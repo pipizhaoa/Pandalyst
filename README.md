@@ -35,7 +35,7 @@
 - We build **PandaTest_V1.0**, including **88** high-quality tables filtered from <a href="http://websail-fe.cs.northwestern.edu/TabEL/" target="_blank">WikiTables</a> with **352** data analysis questions of varying difficulty levels by **GPT-4**.
 - The testing tables are unseen during the training and validation stage.
 
-###Metric: **Executable Rate of Generated Code (%)**
+### Metric: **Executable Rate of Generated Code (%)**
 
 | Model                       | PandaTest_V1.0<br/>exec@1 | EASY<br/>exec@1 | HARD<br/>exec@1 |
 |-----------------------------|---------------------------|-----------------|-----------------|

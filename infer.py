@@ -1,35 +1,8 @@
 from tools.codemanager.helpers.code_manager_cus import CodeManager
-from tools.dataframe import generate_dataframes
+from tools.dataframe import generate_dataframes, code_prompt
 import re
 import torch
 from transformers import GenerationConfig
-
-def code_prompt(df_dec, question):
-    system_prompt = """You are a world-class python programmer that can complete any data analysis tasks by coding."""
-
-    prompt = f"""You are provided with a following pandas dataframe (`df`):
-
-{df_dec}
-
-Using the provided dataframe (`df`), update the following python code and complete the function (analyze_data) that returns the answer to question: \"{question}\"
-
-This is the initial python code to be updated:
-```python
-# TODO import all the dependencies required
-import pandas as pd
-import numpy as np
-
-def analyze_data(df: pd.DataFrame) -> str:
-    \"\"\"
-    Analyze the data and return the answer of question: \"{question}\"
-    1. Prepare: Preprocessing and cleaning data if necessary
-    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
-    3. Analyze: Conducting the actual analysis
-    4. Output: Returning the answer as a string
-    \"\"\"
-```"""
-    return system_prompt, prompt
-
 
 def generate_prompt(instruction):
     return f"""Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\n### Response:"""

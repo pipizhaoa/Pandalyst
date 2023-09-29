@@ -29,15 +29,20 @@ def column_des(df):
             return ""
         data = [x for x in data if not pd.isnull(x)]
         types = got_type(data)
+
         if "string" in types:
             type_ = "string"
             data = [str(x) for x in data]
+            df[name] = df[name].astype(pd.StringDtype())
+
         elif "float" in types:
             type_ = "float"
             data = np.array([float(x) for x in data])
+            df[name] = df[name].astype(float)
         else:
             type_ = "int"
             data = np.array([int(x) for x in data])
+            df[name] = df[name].astype(int)
 
         description = description + "\"Type\": \"" + type_ + "\", "
         if type_ in ["int", "float"]:
@@ -55,6 +60,7 @@ def column_des(df):
     columns_dec = [single_des(c,df[c]) for c in df.columns]
     random.shuffle(columns_dec)
     return "\n".join([x for x in columns_dec if x])
+
 
 def generate_dataframes(df,df_name=None,df_desc=None):
     rows_count = len(df)
@@ -74,7 +80,7 @@ Here are the descriptions of the columns of the dataframe:
     return description
 
 
-def build_prompt(df_dec, question):
+def code_prompt(df_dec, question):
     system_prompt = """You are a world-class python programmer that can complete any data analysis tasks by coding."""
 
     prompt = f"""You are provided with a following pandas dataframe (`df`):

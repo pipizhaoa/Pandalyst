@@ -144,7 +144,7 @@ from infer import infer
 import pandas as pd
 import torch
 
-model_name = "pipizhao/Pandalyst_13B_v1.0",
+model_name = "pipizhao/Pandalyst_13B_V1.0",
 
 model = transformers.AutoModelForCausalLM.from_pretrained(
     model_name,

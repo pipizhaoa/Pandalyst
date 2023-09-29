@@ -24,7 +24,7 @@ def extract_code(code):
 def run_one_code(code, codemanager):
     code = extract_code(code)
     result, code_to_run = codemanager.execute_code(code)
-    assert result, f"code running error: \n{code_to_run}"
+    assert result, f"code running error: \n{code}"
     return result, code_to_run
 
 def evaluate(

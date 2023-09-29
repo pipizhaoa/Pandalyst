@@ -6,7 +6,7 @@ Middlewares are used to modify the code before it is executed.
 
 from abc import ABC, abstractmethod
 
-from pandasai.exceptions import MethodNotImplementedError
+from ..exceptions import MethodNotImplementedError
 
 
 class Middleware(ABC):

@@ -144,12 +144,12 @@ from infer import infer
 import pandas as pd
 import torch
 
-model_name = "pipizhao/Pandalyst_13B_V1.0",
+model_name = "pipizhao/Pandalyst_13B_V1.0"
 
 model = transformers.AutoModelForCausalLM.from_pretrained(
     model_name,
     device_map = "auto",
-    dtype=torch.bfloat16)
+    torch_dtype=torch.bfloat16)
 
 tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
 
@@ -169,7 +169,16 @@ answer, function_code = infer(df,
                               df_name=df_name,
                               df_description=df_description)
 
+print(function_code)
+# def analyze_data(df: pd.DataFrame) ->str:
+#     if df.isnull().values.any():
+#         df = df.dropna()
+#     df_boy = df[df['gender'] == 'boy']
+#     max_score_boy = df_boy[df_boy['score'] == df_boy['score'].max()]
+#     return max_score_boy['name'].values[0]
+
 print(answer)
+# The boy with the highest score is Mike.
 ```
 
 - Tips: Our model now can only return the answer **as a string**, we are seizing time to build the model's **plotting capabilities**.

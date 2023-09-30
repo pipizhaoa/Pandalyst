@@ -27,8 +27,8 @@
 
 | Model              | Checkpoint                                                                                  | Base Model | PandaTest_V1.0 | EASY | HARD | License |
 |--------------------|---------------------------------------------------------------------------------------------|------------|----------------|---------------------|---------------------|  ----- | 
-| Pandalyst-13B-V1.0 | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst_13B_V1.0" target="_blank">HF Link</a> |  CodeLlama-7b-Python  | 70.7           | 75.6           | 65.9                |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
-| Pandalyst-7B-V1.1  | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst-7B-V1.1" target="_blank">HF Link</a>  |  WizardCoder-Python-13B-V1.0   | 76.1           | 85.2           | 67.0                   |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
+| Pandalyst-13B-V1.0 | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst_13B_V1.0" target="_blank">HF Link</a> |  WizardCoder-Python-13B-V1.0  | 70.7           | 75.6           | 65.9                |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
+| Pandalyst-7B-V1.1  | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst-7B-V1.1" target="_blank">HF Link</a>  |  CodeLlama-7b-Python   | 76.1           | 85.2           | 67.0                   |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
 
 
 ## Performance

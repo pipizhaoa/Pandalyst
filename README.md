@@ -21,14 +21,14 @@
 - Pandalyst has very competitive performance, significantly outperforming models of the same size and even outperforming some of the strongest closed-source models.
 
 ## News
-
-- 🔥[2023/09/28] We released **Pandalyst-13B-V1.0** , which achieves the **70.7 exec@1** in our **PandaTest_V1.0** and surpasses **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
+- 🔥[2023/09/30] We released **Pandalyst-7B-V1.1** , which was trained on **CodeLlama-7b-Python** and achieves the **0.76 exec@1** in our **PandaTest_V1.0** and surpasses **Pandalyst-13B-V1.0**, **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
+- 🔥[2023/09/28] We released **Pandalyst-13B-V1.0** , which was trained on **WizardCoder-Python-13B-V1.0** and achieves the **70.7 exec@1** in our **PandaTest_V1.0** and surpasses **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
 
 
 | Model              | Checkpoint                                                                                  | PandaTest_V1.0 | EASY | HARD | License |
 |--------------------|---------------------------------------------------------------------------------------------|----------------|---------------------|---------------------|  ----- | 
 | Pandalyst-13B-V1.0 | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst_13B_V1.0" target="_blank">HF Link</a> | 70.7           | 75.6                | 65.9                |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
-| Pandalyst-7B-V1.0  | coming soon                                                                                 | -              | -                   | -                   |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
+| Pandalyst-7B-V1.1  | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst-7B-V1.1" target="_blank">HF Link</a>  | 76.1              | 85.2                   | 67.0                   |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
 
 
 ## Performance
@@ -38,10 +38,11 @@
 ### Metric: **Executable Rate of Generated Code (%)**
 
 | Model                       | PandaTest_V1.0<br/>exec@1 | EASY<br/>exec@1 | HARD<br/>exec@1 |
-|-----------------------------|---------------------------|-----------------|-----------------|
-| GPT-3.5-turbo-0613          | 58.5                      | 66.5            | 50.6            |
-| WizardCoder-Python-13B-V1.0 | 42.0                      | 59.7            | 24.4            |
-| Pandalyst-13B-V1.0          | **70.7**                  | **75.6**        | **65.9**        |
+|-----------------------------|-----------------------|-------------|-------------|
+| GPT-3.5-turbo-0613          | 58.5                  | 66.5        | 50.6        |
+| WizardCoder-Python-13B-V1.0 | 42.0                  | 59.7        | 24.4        |
+| Pandalyst-13B-V1.0          | 70.7                  | 75.6        | 65.9        |
+| Pandalyst-7B-V1.1           | **76.1**              | **85.2**    | **67.0**    |
 
 
 <p align="left">
@@ -55,6 +56,8 @@
     <img src="imgs/human_eval.png" width="400"/>
 </p>
 
+- As the results shown, The performance of **Pandalyst-13B-V1.0** and **Pandalyst-7B-V1.1** is similar. 
+- Since the 7B model achieves a higher executable rate, I recommend that you try the **Pandalyst-7B-V1.1** first.
 - Thank you for your understanding that manually evaluating the accuracy of code takes a lot of time.
 
 ### Case show
@@ -145,6 +148,7 @@ import pandas as pd
 import torch
 
 model_name = "pipizhao/Pandalyst_13B_V1.0"
+# model_name = "pipizhao/Pandalyst_7B_V1.1"
 
 model = transformers.AutoModelForCausalLM.from_pretrained(
     model_name,
@@ -187,7 +191,7 @@ print(answer)
 | Todo List                                        | state       | Timeline |
 |--------------------------------------------------|-------------|----------|
 | Realse Pandalyst-13B-V1.0                        | Done     ✅  | 0928     |
-| Realse Pandalyst-7B-V1.0                         | Training ▶️ | Soon     |
+| Realse Pandalyst-7B-V1.1                         | Done     ✅️ | 0930     |
 | Support plotting capabilities                    | Building ▶️️ | October  |
 | Higher quality training and more powerful models | Panding  ⏸  | -        |
 | Supports multiple tables                         | Panding  ⏸  | -        |
@@ -200,7 +204,6 @@ print(answer)
     <img src="imgs/method.jpg" width="500"/>
 </p>
 
-**We train Pandalyst based on WizardCoder.**
 ## 🤝 Contributing
 
 Contributions are welcome! If you can provide any comments or data support, please feel free to contact us or just open a issue!

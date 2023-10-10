@@ -33,16 +33,12 @@ def column_des(df):
         if "string" in types:
             type_ = "string"
             data = [str(x) for x in data]
-            df[name] = df[name].astype(pd.StringDtype())
-
         elif "float" in types:
             type_ = "float"
             data = np.array([float(x) for x in data])
-            df[name] = df[name].astype(float)
         else:
             type_ = "int"
             data = np.array([int(x) for x in data])
-            df[name] = df[name].astype(int)
 
         description = description + "\"Type\": \"" + type_ + "\", "
         if type_ in ["int", "float"]:

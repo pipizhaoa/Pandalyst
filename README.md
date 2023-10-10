@@ -172,6 +172,7 @@ answer, function_code = infer(df,
                               tokenizer=tokenizer,
                               df_name=df_name,
                               df_description=df_description)
+# TODO edit infer.py to batch-generate muti python codes at one time, and select the executable one.
 
 print(function_code)
 # def analyze_data(df: pd.DataFrame) ->str:

@@ -21,8 +21,8 @@
 - Pandalyst has very competitive performance, significantly outperforming models of the same size and even outperforming some of the strongest closed-source models.
 
 ## News
-- ⚠️️We found that using only executable code for training can lead to models **cheating** and tending to use crude data preprocessing methods, and it is inappropriate to use executable rate as an indicator. We will try to fix these issues in the next model release.
-- Support the model to generate multiple codes at the same time (just set **try_n**), and select the executable code for execution.
+- ⚠️️[2023/10/12] We found that using only executable code for training can lead to models **cheating** and tending to use crude data preprocessing methods, and it is inappropriate to use executable rate as an indicator. We will try to fix these issues in the next model release.
+- 🔧[2023/10/11] Support the model to generate multiple codes at the same time (just set **try_n**), and select the executable code for execution.
 - 🔥[2023/09/30] We released **Pandalyst-7B-V1.1** , which was trained on **CodeLlama-7b-Python** and achieves the **76.1 exec@1** in our **PandaTest_V1.0** and surpasses **Pandalyst-13B-V1.0**, **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
 - 🔥[2023/09/28] We released **Pandalyst-13B-V1.0** , which was trained on **WizardCoder-Python-13B-V1.0** and achieves the **70.7 exec@1** in our **PandaTest_V1.0** and surpasses **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
 

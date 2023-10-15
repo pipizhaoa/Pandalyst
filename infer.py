@@ -1,3 +1,5 @@
+import pandas as pd
+
 from tools.codemanager.helpers.code_manager_cus import CodeManager
 from tools.dataframe import generate_dataframes, code_prompt, plot_code_prompt
 import re
@@ -50,15 +52,27 @@ def evaluate(
     output = tokenizer.batch_decode(s, skip_special_tokens=True)
     return output
 
-def infer(df,
-          question,
+def infer(df: pd.DataFrame,
+          question: str,
           model,
           tokenizer,
-          df_name = None,
-          df_description = None,
-          try_n = 1,
-          plot = False,
-          save_img = None):
+          df_name: str = None,
+          df_description: str = None,
+          try_n: int = 1,
+          plot: bool = False,
+          save_img: str = None):
+    """
+    :param df: pd.DataFrame
+    :param question:
+    :param model:
+    :param tokenizer:
+    :param df_name:
+    :param df_description:
+    :param try_n: batch size
+    :param plot: if ask model to plot chart
+    :param save_img: the path_name to save chart
+    :return:
+    """
 
     df_dec = generate_dataframes(df, df_name, df_description)
 
@@ -81,7 +95,11 @@ def infer(df,
     )
 
     _output = evaluate(instruction,model,tokenizer,generation_config,try_n)
-    anly_codemanager = CodeManager(df=df, func_name="analyze_data")
+
+    if plot:
+        anly_codemanager = CodeManager(df=df, func_name="plot_chart")
+    else:
+        anly_codemanager = CodeManager(df=df, func_name="analyze_data")
 
     try:
         final_output = _output[0].split("### Response:")[1].strip()

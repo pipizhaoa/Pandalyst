@@ -16,94 +16,82 @@
 - Pandalyst has strong generalization capabilities for data tables in different fields and different data analysis needs.
 
 **Why is Pandalyst**
-- Pandalyst is open source and free to use, and its small parameter size (7B/13B) allows us to easily deploy it on local PC. 
+- Pandalyst is open source and free to use, and its small parameter size (7B) allows us to easily deploy it on local PC. 
 - Pandalyst can handle complex data tables (multiple columns and multiple rows), allowing us to enter enough context to describe our table in detail.
 - Pandalyst has very competitive performance, significantly outperforming models of the same size and even outperforming some of the strongest closed-source models.
 
 ## News
+- 🔥[2023/10/15] Now we can **plot** 📈! and much more powerful! We released **Pandalyst-7B-V1.2**, which was trained on **CodeLlama-7b-Python** and it surpasses **ChatGPT-3.5 (2023/06/13)**, **Pandalyst-7B-V1.1** and **WizardCoder-Python-13B-V1.0** in our **PandaTest_V1.0**.
 - ⚠️️[2023/10/12] We found that using only executable code for training can lead to models **cheating** and tending to use crude data preprocessing methods, and it is inappropriate to use executable rate as an indicator. We will try to fix these issues in the next model release.
 - 🔧[2023/10/11] Support the model to generate multiple codes at the same time (just set **try_n**), and select the executable code for execution.
-- 🔥[2023/09/30] We released **Pandalyst-7B-V1.1** , which was trained on **CodeLlama-7b-Python** and achieves the **76.1 exec@1** in our **PandaTest_V1.0** and surpasses **Pandalyst-13B-V1.0**, **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
-- 🔥[2023/09/28] We released **Pandalyst-13B-V1.0** , which was trained on **WizardCoder-Python-13B-V1.0** and achieves the **70.7 exec@1** in our **PandaTest_V1.0** and surpasses **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
+- 🤖️[2023/09/30] We released **Pandalyst-7B-V1.1** , which was trained on **CodeLlama-7b-Python** and achieves the **76.1 exec@1** in our **PandaTest_V1.0** and surpasses **WizardCoder-Python-13B-V1.0** and **ChatGPT-3.5 (2023/06/13)**.
 
+| Model               | Checkpoint                                                                                 | Base Model | License |
+|---------------------|--------------------------------------------------------------------------------------------|------------|  ----- | 
+| 🔥Pandalyst-7B-V1.2 | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst-7B-V1.2" target="_blank">HF Link</a> |  CodeLlama-7b-Python  |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
+| Pandalyst-7B-V1.1   | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst-7B-V1.1" target="_blank">HF Link</a> |  CodeLlama-7b-Python  |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
 
-| Model              | Checkpoint                                                                                  | Base Model | PandaTest_V1.0 | EASY | HARD | License |
-|--------------------|---------------------------------------------------------------------------------------------|------------|----------------|---------------------|---------------------|  ----- | 
-| Pandalyst-13B-V1.0 | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst_13B_V1.0" target="_blank">HF Link</a> |  WizardCoder-Python-13B-V1.0  | 70.7           | 75.6           | 65.9                |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
-| Pandalyst-7B-V1.1  | 🤗 <a href="https://huggingface.co/pipizhao/Pandalyst-7B-V1.1" target="_blank">HF Link</a>  |  CodeLlama-7b-Python   | 76.1           | 85.2           | 67.0                   |  <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/" target="_blank">Llama2</a>  |
-
-
+---
 ## Performance
-- We build **PandaTest_V1.0**, including **88** high-quality tables filtered from <a href="http://websail-fe.cs.northwestern.edu/TabEL/" target="_blank">WikiTables</a> with **352** data analysis questions of varying difficulty levels by **GPT-4**.
-- The testing tables are unseen during the training and validation stage.
 
-### Metric: **Executable Rate of Generated Code (%)**
+### QA-Performance
+- We build **PandaTest_V1.0**, including **88** high-quality tables filtered from <a href="http://websail-fe.cs.northwestern.edu/TabEL/" target="_blank">WikiTables</a> with **352** data analysis questions of varying difficulty levels by **GPT-4**. The testing tables are unseen during the training and validation stage.
 
-| Model                       | PandaTest_V1.0<br/>exec@1 | EASY<br/>exec@1 | HARD<br/>exec@1 |
-|-----------------------------|-----------------------|-------------|-------------|
-| GPT-3.5-turbo-0613          | 58.5                  | 66.5        | 50.6        |
-| WizardCoder-Python-13B-V1.0 | 42.0                  | 59.7        | 24.4        |
-| Pandalyst-13B-V1.0          | 70.7                  | 75.6        | 65.9        |
-| Pandalyst-7B-V1.1           | **76.1**              | **85.2**    | **67.0**    |
+⚠️ The metric **Executable Rate of Generated Code** was drop.
 
+**Human evaluation of Generated code**
 
+- Similar to most work, we use GPT-4 as a judge to judge whether the code and answers generated by the model are correct.
+- Specifically, we randomly selected 50 samples in our test set and manually judged the accuracy of the answers by comparing with the answers generated by GPT-4.
+- It is worth noting that even the answers generated by GPT-4 may not be accurate, so this metric can only be used as a reference value and cannot fully represent the performance difference between the models and GPT-4.
+
+**Pandalyst-7B-V1.2 vs others**
 <p align="left">
-    <img src="imgs/exec_compare.png" width="400"/>
+    <img src="imgs/code_acc.png" width="400"/>
 </p>
 
-### **Accuracy of Generated Answer (Human evaluation)**
-
-- We randomly selected 20 test sets for manual evaluation and compared the answers generated by Pandalyst-13B-V1.0 and others.
-<p align="left">
-    <img src="imgs/human_eval.png" width="400"/>
-</p>
-
-- As the results shown, The performance of **Pandalyst-13B-V1.0** and **Pandalyst-7B-V1.1** is similar. 
-- Since the 7B model achieves a higher executable rate, I recommend that you try the **Pandalyst-7B-V1.1** first.
 - Thank you for your understanding that manually evaluating the accuracy of code takes a lot of time.
 
-### Case show
+### Plot-Performance
+Building
 
+## Case show
+### QA
 **Task 1**
 ```
-Dataframe Name: Season by season, with 36 rows and 7 columns.
-Description: This is a table about Tofaş S.K.: Season by season
-{"Column Name": "Postseason", "Type": "string", "Enumerated Values": ["Lower divisions", "Final Group", "–", "Champion", "Runner-up", "Relegated", "Quarterfinalist", "Final Stage 4th", "Semifinalist", "Promoted Champion", "Final Stage", "Promoted"]}
-{"Column Name": "European Competitions", "Type": "string", "Enumerated Values": ["Played Korać Cup", "Played Euroleague", "Played European Cup", "EuroChallenge Top 16", "Runner-up Korać Cup", "–", "Lower divisions"]}
-{"Column Name": "Division", "Type": "string", "Enumerated Values": ["Lower divisions", "T2BL", "TBL", "TB2L"]}
-{"Column Name": "Season", "Type": "string", "Enumerated Values": ["2005–06", "2009–10", "1998–99", "2000–03", "1981–82", "1990–91", "1988–89", "1977–78", "1995–96", "1974–76", "1980–81", "2011–12", "1979–80", "1986–87", "2003–04", "1983–84", "1993–94", "1999–00", "1992–93", "1978–79", "2004–05", "1987–88", "1984–85", "2010–11", "1996–97", "1976–77", "2008–09", "1991–92", "1982–83", "1989–90", "2012–13", "1985–86", "2006–07", "1997–98", "1994–95", "2007–08"]}
-{"Column Name": "Tier", "Type": "string", "Enumerated Values": ["2", "Lower divisions", "1"]}
-{"Column Name": "Cup Competitions", "Type": "string", "Enumerated Values": ["–", "Champion", "Quarterfinalist", "Lower divisions", "Group Stage"]}
-{"Column Name": "Pos.", "Type": "string", "Enumerated Values": ["15", "Lower divisions", "10", "2", "6", "5", "1", "9", "11", "8", "7", "14", "4"]}
-
+Dataframe Name: Career summary, with 43 rows and 9 columns.
+Description: This is a table about Gabriel Furlán: Career summary
+Columns: Season, Series, Team, Races, Wins, Poles, Podiums, Points, Position
+Here are the descriptions of the columns of the dataframe:
+{"Column Name": "Season", "Type": "int", "MIN": 1984, "MAX": 2011}
+{"Column Name": "Wins", "Type": "string", "Enumerated Values": ["0", "6", "2", "3", "7", "?", "5", "1"]}
+{"Column Name": "Position", "Type": "string", "Enumerated Values": ["9th", "18th", "2nd", "10th", "N/A", "13th", "7th", "4th", "6th", "3rd", "8th", "?", "1st", "16th", "11th", "19th", "5th"]}
+{"Column Name": "Podiums", "Type": "string", "Enumerated Values": ["9", "0", "3", "7", "?", "5", "1", "4"]}
+{"Column Name": "Team", "Type": "string", "Enumerated Values": ["INI Competición", "Junior Team", "Forti Corse", "GF Motorsport", "GF Racing", "Toyota Team Argentina", "Gustavo Sommi", "Ford", "DTA", "Maldonado Competición", "Sommi-Zanón", "Bainotti Dowen Pagio", "Scuderia 111", "Jolly Club"]}
+{"Column Name": "Races", "Type": "string", "Enumerated Values": ["9", "8", "13", "2", "7", "14", "18", "?", "5", "1", "12", "4", "11"]}
+{"Column Name": "Points", "Type": "string", "Enumerated Values": ["39", "90", "67", "0", "35.5", "79", "78", "52", "N/A", "16", "38", "26", "65", "144", "1", "139", "175", "42", "32", "46"]}
+{"Column Name": "Series", "Type": "string", "Enumerated Values": ["Monaco Grand Prix Formula Three", "TC 2000", "Fórmula 2 Codasur", "Stock Car Brasil", "Formula Renault Argentina", "International Formula 3000", "Super Turismo V8", "World Cup Formula 3000", "Top Race V6", "Top Race V6 Copa América", "Formula Three Sudamericana", "Italian Formula Three", "TC 2000 Endurance series"]}
+{"Column Name": "Poles", "Type": "string", "Enumerated Values": ["0", "2", "3", "?", "5", "1", "4"]}
 Question: 
-Analyze the correlation between Tofaş S.K.'s league position ('Pos.') and their performance in European Competitions. Do years of high performance in European Competitions align with high league positions?
+Can we analyze the correlation between the number of races Gabriel Furlán participated in each season and the number of wins he achieved in the same season?
 ```
-**Code 1 by Pandalyst-13B-V1.0**
+**Code 1**
 ```python
-import pandas as pd
-import numpy as np
-
-def analyze_data(df: pd.DataFrame) -> str:
-    # Preprocessing and cleaning data
-    # Convert 'Pos.' column to numeric, errors='coerce' will turn non-numeric values to NaN
-    df['Pos.'] = pd.to_numeric(df['Pos.'], errors='coerce')
-
-    # Remove rows where 'Pos.' or 'European Competitions' is NaN
-    df = df.dropna(subset=['Pos.', 'European Competitions'])
-
-    # Create a new column 'European Competitions Performance' based on the level of performance in European Competitions
-    # '–' and 'Lower divisions' are considered as low performance, others are considered as high performance
-    df['European Competitions Performance'] = np.where(df['European Competitions'].isin(['–', 'Lower divisions']), 0, 1)
-
-    # Calculate the correlation between 'Pos.' and 'European Competitions Performance'
-    correlation = df['Pos.'].corr(df['European Competitions Performance'])
-
-    # Analyze the correlation and return the answer
-    if correlation > 0.5:
-        return "Yes, years of high performance in European Competitions align with high league positions."
+def analyze_data(df: pd.DataFrame) ->str:
+    df['Races'] = df['Races'].replace(['?', 'N/A'], '0')
+    df['Wins'] = df['Wins'].replace(['?', 'N/A'], '0')
+    df['Races'] = pd.to_numeric(df['Races'])
+    df['Wins'] = pd.to_numeric(df['Wins'])
+    df_grouped = df.groupby('Season').agg({'Races': 'sum', 'Wins': 'sum'})
+    correlation = df_grouped['Races'].corr(df_grouped['Wins'])
+    if correlation > 0:
+        return 'There is a positive correlation between the number of races Gabriel Furlán participated in each season and the number of wins he achieved in the same season.'
+    elif correlation < 0:
+        return 'There is a negative correlation between the number of races Gabriel Furlán participated in each season and the number of wins he achieved in the same season.'
     else:
-        return "No, years of high performance in European Competitions do not align with high league positions."
+        return 'There is no correlation between the number of races Gabriel Furlán participated in each season and the number of wins he achieved in the same season.'
+
+# There is a positive correlation between the number of races Gabriel Furlán participated in each season and the number of wins he achieved in the same season.
 ```
 -----
 **Task 2**
@@ -119,7 +107,7 @@ Description: This is a table about Shimabara Railway Line: Stations
 
 Can you identify the pattern or frequency of express stops across different locations, and which locations have the maximum and minimum frequency of express stops?
 ```
-**Code 2 by Pandalyst-13B-V1.0**
+**Code 2**
 ```python
 import pandas as pd
 import numpy as np
@@ -141,16 +129,85 @@ def analyze_data(df: pd.DataFrame) -> str:
     # Output: Returning the answer as a string
     return f"The location with maximum frequency of express stops is {max_frequency_location} and the location with minimum frequency of express stops is {min_frequency_location}."
 ```
+----
+### Plot
+1. plot a bar chart to visualize the number of participants from each entrant or organization in the Championship
+```python
+def plot_chart(df: pd.DataFrame):
+    # Prepare: Preprocessing and cleaning data if necessary
+    # Replace '–' with 0 and convert the columns to numeric
+    df.replace('–', 0, inplace=True)
+    for col in df.columns:
+        if col != "":
+            df[col] = pd.to_numeric(df[col])
 
+    # Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    # Group by the entrant or organization and sum the participants
+    df_grouped = df.groupby("").sum()
+
+    # Analyze: Conducting the actual analysis
+    # No specific analysis needed as we are just plotting the data
+
+    # Plot: Creating a chart and saving it to an image in './temp_chart.png' (do not show the chart)
+    plt.figure(figsize=(10,6))
+    plt.bar(df_grouped.index, df_grouped.values, color='blue')
+    plt.xlabel('Entrant or Organization')
+    plt.ylabel('Number of Participants')
+    plt.title('Number of Participants from Each Entrant or Organization in the Championship')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    plt.savefig('./temp_chart.png', dpi=300)
+    plt.close()
+```
+
+<p align="left">
+    <img src="imgs/case1_chart.png" width="400"/>
+</p>
+
+2. Construct a heat map to showcase the correlation between the total points garnered and the rankings at each of the Championship locations for the top three entrants.
+```python
+def plot_chart(df: pd.DataFrame):
+    for col in df.columns:
+        if col != '':
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+    top_three_entrants = df.sort_values(by='Total', ascending=False).head(3)
+    correlation_matrix = top_three_entrants.drop('Total', axis=1).corr()
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+    plt.title('Correlation between Total Points and Rankings at Each Location for Top Three Entrants')
+    plt.savefig('./temp_chart.png')
+```
+<p align="left">
+    <img src="imgs/case2_chart.png" width="400"/>
+</p>
+
+3. Generate a histogram of the 'Floors' column to understand the distribution of the number of floors in these hotels.
+4. 
+```python
+def plot_chart(df: pd.DataFrame):
+    plt.figure(figsize=(10, 6))
+    plt.hist(df['Floors'], bins=10, color='skyblue', edgecolor='black')
+    plt.title('Distribution of Floors in Tallest Hotels')
+    plt.xlabel('Number of Floors')
+    plt.ylabel('Frequency')
+    plt.grid(True)
+    plt.savefig('./temp_chart.png', dpi=300, bbox_inches='tight')
+    plt.close()
+```
+<p align="left">
+    <img src="imgs/case3_chart.png" width="400"/>
+</p>
+
+---
 ## Usage
+### Preparation
 ```python
 import transformers
 from infer import infer
 import pandas as pd
 import torch
 
-model_name = "pipizhao/Pandalyst_13B_V1.0"
-# model_name = "pipizhao/Pandalyst_7B_V1.1"
+model_name = "pipizhao/Pandalyst-7B-V1.2"
 
 model = transformers.AutoModelForCausalLM.from_pretrained(
     model_name,
@@ -165,9 +222,11 @@ df = pd.DataFrame({"name":["Mike","Tony","Sally"],
 
 df_name = "score sheet" # Optional
 df_description = "score sheet of class 1" # Optional
+```
 
+### QA
+```
 question = "Who is the boy with the highest score?"
-
 answer, function_code = infer(df,
                               question=question,
                               model=model,
@@ -175,7 +234,6 @@ answer, function_code = infer(df,
                               df_name=df_name,
                               df_description=df_description,
                               try_n = 1)
-# TODO edit infer.py to batch-generate muti python codes at one time, and select the executable one.
 
 print(function_code)
 # def analyze_data(df: pd.DataFrame) ->str:
@@ -189,25 +247,32 @@ print(answer)
 # The boy with the highest score is Mike.
 ```
 
-- Tips: Our model now can only return the answer **as a string**, we are seizing time to build the model's **plotting capabilities**.
+### Plot
+```
+question = "Please help me draw a pie chart of the ratio of boys and girls in school"
+answer, function_code = infer(df,
+                              question=question,
+                              model=model,
+                              tokenizer=tokenizer,
+                              df_name=df_name,
+                              df_description=df_description,
+                              try_n = 1,
+                              plot = True, # poltting task
+                              save_img = "./my_img_path")
 
+# the img will be saved in ./my_img_path
+```
+
+---
 ## TO DO
-| Todo List                                     | state       | Timeline |
-|-----------------------------------------------|-------------|----------|
-| Realse Pandalyst-13B-V1.0                     | Done     ✅  | 0928     |
-| Realse Pandalyst-7B-V1.1                      | Done     ✅️ | 0930     |
-| Support plotting capabilities                 | Building ▶️️ | October  |
-| Higher quality training and more powerful models | Panding  ⏸  | -        |
-| Support multiple tables                       | Panding  ⏸  | -        |
-| Support debuging capabilities                 | Panding  ⏸  | -        |
+| Todo List                     | state      | Timeline |
+|-------------------------------|------------|----------|
+| Support plotting capabilities | Done ✅️️   | 1014     |
+| Building PandaTest_Plot_V1.0  | Doing ▶️️️ | 10xx     |
+| Support multiple tables       | Panding  ⏸ | -        |
+| Support debuging capabilities | Panding  ⏸ | -        |
 
 #### Just start 🌟! You can get our latest models as soon as possible.
-
-## Overview of Our Method
-
-<p align="center">
-    <img src="imgs/method.jpg" width="500"/>
-</p>
 
 ## 🤝 Contributing
 
@@ -217,5 +282,4 @@ Contributions are welcome! If you can provide any comments or data support, plea
 ## Acknowledgements
 - This project is based on the pandas library.
 - <a href="https://github.com/gventuri/pandas-ai/" target="_blank">PandasAI</a> provided the initial inspiration and a reference to the code execution module.
-- Great model provided by <a href="https://huggingface.co/WizardLM/WizardCoder-Python-13B-V1.0" target="_blank">WizardCoder</a>, and the sense of **Evol-Instruct** proposed by <a href="https://arxiv.org/abs/2304.12244" target="_blank">WizardLM</a>
 - Please use our model responsibly.

@@ -191,7 +191,6 @@ def plot_chart(df: pd.DataFrame):
 </p>
 
 3. Generate a histogram of the 'Floors' column to understand the distribution of the number of floors in these hotels.
-4. 
 ```python
 def plot_chart(df: pd.DataFrame):
     plt.figure(figsize=(10, 6))

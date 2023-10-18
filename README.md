@@ -217,7 +217,7 @@ import pandas as pd
 import torch
 
 model_name = "pipizhao/Pandalyst-7B-V1.2"
-
+# New infer tools only support >= V1.2 
 model = transformers.AutoModelForCausalLM.from_pretrained(
     model_name,
     device_map = "auto",

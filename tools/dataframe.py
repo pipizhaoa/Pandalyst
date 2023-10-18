@@ -27,7 +27,9 @@ def column_des(df):
 
         if not find_valid:
             return ""
-        data = [x for x in data if not pd.isnull(x)]
+        pre_len = len(data)
+        data = [x for x in data if x and not pd.isnull(x)]
+        post_len = len(data)
         types = got_type(data)
 
         if "string" in types:
@@ -47,11 +49,18 @@ def column_des(df):
             max_ = data.max()
             description = description + "\"MIN\": " + str(min_) + ", \"MAX\": " + str(max_)
         elif type_ == "string":
-            values = list(set(["\"" + str(x).strip() + "\"" for x in data if not pd.isnull(x)]))
-            if len(values) >= 20: ## to adjust: Max 20 Enumerated Values
-                values = values[:20]
+            values = list(set(["\"" + str(x).strip() + "\"" for x in data]))
+            random.shuffle(values)
+            if len(values) >= 20:
+                values = values[:random.randint(5, 15)]
             numerates = ", ".join(values)
             description = description + "\"Enumerated Values\": [" + numerates + "]"
+
+        if post_len == pre_len:
+            description = description + ", \"Contain NaN\": False"
+        else:
+            description = description + ", \"Contain NaN\": True"
+
         return description + "}"
 
     columns_dec = [single_des(c,df[c]) for c in df.columns]
